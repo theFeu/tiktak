@@ -13,8 +13,13 @@ class Game
         $this->renderer = new Renderer();
 
         return $this->play();
-      }
+    }
 
+    /*
+    Plays through a game and handles the inputs from the renderer.
+
+    Return bool|NULL $winner
+    */
     protected function play() {
       $endCondition = false;
       $turn = 0;
@@ -35,11 +40,18 @@ class Game
       if ($endCondition === false) {
         $this->renderer->drawDraw();
       } else {
-        $this->renderer->winner(! $this->currentPlayer);
+        $winner = (! $this->currentPlayer);
+        $this->renderer->winner($winner);
+
+        return $winner;
       }
       return;
     }
 
+    /*
+    Checks is tile is already set
+    Validates user input to be a number in correct range
+    */
     protected function validateTile($tile) {
       if (is_numeric($tile) && $this->field[$tile] === NULL) {
           return true;
@@ -47,6 +59,11 @@ class Game
       return false;
     }
 
+    /*
+    Checks if game is won
+
+    Return bool $isWon
+    */
     protected function checkWinCondition() {
       // horizontal
       if ($this->compareThree(0,1,2)) { return true; }
@@ -65,6 +82,11 @@ class Game
       return false;
     }
 
+    /*
+    Helper for checkWinCondition()
+
+    Return bool $isSame
+    */
     protected function compareThree($first, $second, $third) {
       if (  $this->field[$first] !== NULL
             && $this->field[$first] === $this->field[$second]
