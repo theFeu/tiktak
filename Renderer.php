@@ -59,12 +59,12 @@ class Renderer
       exit;
     }
 
-    protected function playerToStone($isX) {
-      if ($isX) {
-        return "\e[95m" . "x" . "\e[0m";
+    protected function playerToStone($isO) {
+      if ($isO) {
+        return "\e[94m" . "o" . "\e[0m";
       }
 
-      return "\e[94m" . "o" . "\e[0m";
+      return "\e[95m" . "x" . "\e[0m";
     }
 }
 ?>

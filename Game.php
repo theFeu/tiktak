@@ -5,7 +5,7 @@ include "Renderer.php";
 class Game
 {
     public $field = array();
-    public $currentPlayer = false;
+    public $isPlayerOne = true;
     public $renderer;
 
     function __construct() {
@@ -24,10 +24,10 @@ class Game
       $endCondition = false;
       $turn = 0;
       while (! $endCondition && $turn < 9) {
-        $selectedTile = $this->renderer->getNewTile($this->field, $this->currentPlayer);
+        $selectedTile = $this->renderer->getNewTile($this->field, $this->isPlayerOne);
         if ($this->validateTile($selectedTile)) {
-          $this->field[(int)$selectedTile] = $this->currentPlayer;
-          $this->currentPlayer = !$this->currentPlayer;
+          $this->field[(int)$selectedTile] = $this->isPlayerOne;
+          $this->isPlayerOne = !$this->isPlayerOne;
         } else {
           $this->renderer->invalidTile();
         }
@@ -35,12 +35,12 @@ class Game
         $turn++;
       }
 
-      $this->renderer->render($this->field, $this->currentPlayer);
+      $this->renderer->render($this->field, $this->isPlayerOne);
 
       if ($endCondition === false) {
         $this->renderer->drawDraw();
       } else {
-        $winner = (! $this->currentPlayer);
+        $winner = (! $this->isPlayerOne);
         $this->renderer->winner($winner);
 
         return $winner;
