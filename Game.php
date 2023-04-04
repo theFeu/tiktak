@@ -53,7 +53,9 @@ class Game
     Validates user input to be a number in correct range
     */
     protected function validateTile($tile) {
-      if (is_numeric($tile) && $this->field[$tile] === NULL) {
+      if (  (int)$tile >= 0 && (int)$tile < 9
+            && $this->field[$tile] === NULL
+            && is_numeric($tile)) {
           return true;
       }
       return false;
