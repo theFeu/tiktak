@@ -1,8 +1,8 @@
 <?php
 include "Game.php";
 
-readline("Quickstart ");
-new Game();
+readline("Press Enter to Start ");
+$winner = new Game();
 
 echo "\n";
 ?>
