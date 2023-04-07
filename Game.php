@@ -28,11 +28,11 @@ class Game
         if ($this->validateTile($selectedTile)) {
           $this->field[(int)$selectedTile] = $this->isPlayerOne;
           $this->isPlayerOne = !$this->isPlayerOne;
+          $turn++;
         } else {
           $this->renderer->invalidTile();
         }
         $endCondition = $this->checkWinCondition();
-        $turn++;
       }
 
       $this->renderer->render($this->field, $this->isPlayerOne);
